@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    include ("functions.inc.php");
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -6,17 +11,25 @@
     </head>
 
     <main>
+        <?php
+            if (isset($_SESSION['connectedUser']) && $_SESSION['connectedUser'])
+                echo getHeader(true);
+            else
+                echo getHeader(false);
+        ?>
 
-        <a href="?p=install">Install</a>
+        <a href="?p=install">Créer la base de données</a>
 
     </main>
 </html>
 
 <?php
-
     include ("config.inc.php");
 
     if (isset($_GET['p']))  {
-        include ("install.php");
+        if ($_GET['p'] == "install")
+            include ("install.php");
+        else if ($_GET['p'] == "onDisconnect")
+            session_destroy();
     }
 ?>

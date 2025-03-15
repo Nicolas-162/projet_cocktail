@@ -7,7 +7,7 @@
 $host="127.0.0.1";
 $user="root";
 $pass="";
-$base="COKCTAILS";
+$base="COCKTAILS";
 
 $filename = "Donnees.inc.php"; // source file for db
 
