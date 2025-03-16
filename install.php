@@ -22,9 +22,9 @@
 
     CREATE TABLE `recette` (
     `id` int(3) UNSIGNED NOT NULL,
-    `titre` varchar(50) NOT NULL,
-    `ingredients` varchar(200) NOT NULL,
-    `preparation` varchar(200) NOT NULL
+    `titre` varchar(100) NOT NULL,
+    `ingredients` varchar(500) NOT NULL,
+    `preparation` varchar(1000) NOT NULL
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 

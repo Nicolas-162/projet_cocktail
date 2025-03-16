@@ -18,8 +18,6 @@
                 echo getHeader(false);
         ?>
 
-        <a href="?p=install">Créer la base de données</a>
-
     </main>
 </html>
 
@@ -32,7 +30,11 @@
         else if ($_GET['p'] == "onDisconnect") {
             session_destroy();
             header("Refresh: 0; url=index.php");
-        }
-
+        } else if ($_GET['p'] == "recipesList") {
+            include ("recipesList.php");
+        } else if ($_GET['p'] == "recipeDetails") {
+            include ("recipeDetails.php");
+        } else if ($_GET['p'] == "recipeByIngredient")
+            include ("recipeByIngredient.php");
     }
 ?>
