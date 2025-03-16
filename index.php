@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title></title>
+        <title>Cocktails</title>
         <meta charset="utf-8" />
     </head>
 
@@ -27,9 +27,12 @@
     include ("config.inc.php");
 
     if (isset($_GET['p']))  {
-        if ($_GET['p'] == "install")
+        if ($_GET['p'] == "install") // l'utilisateur veut installer la base de donnees
             include ("install.php");
-        else if ($_GET['p'] == "onDisconnect")
+        else if ($_GET['p'] == "onDisconnect") {
             session_destroy();
+            header("Refresh: 0; url=index.php");
+        }
+
     }
 ?>

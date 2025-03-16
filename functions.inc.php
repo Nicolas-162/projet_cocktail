@@ -25,15 +25,17 @@ function multi_query($link,$requete)
  * @return string : l'entete
  */
 function getHeader($isConnected){
-    $htmlCode = "<header>";
+    $htmlCode = "<header>
+    <h1>The Cocktail Workshop</h1>
+    <nav>";
     if ($isConnected){
-        $htmlCode .= "<a href='log.php?p=onAccount'>Accéder aux paramètres de compte</a>
-                    <a href='index.php?onDisconnect'>Se déconnecter</a>'";
+        $htmlCode .= "<li><a href='log.php?p=onAccount'>Accéder aux paramètres de compte</a></li>
+                    <li><a href='index.php?p=onDisconnect'>Se déconnecter</a></li>";
     } else {
-        $htmlCode .= "<a href='log.php?p=onLogIn'>Se connecter</a>
-                     <a href='log.php?p=onSignIn'>S'inscrire</a>";
+        $htmlCode .= "<li><a href='log.php?p=onLogIn'>Se connecter</a></li>
+                     <li><a href='log.php?p=onSignIn'>S'inscrire</a></li>";
     }
-    $htmlCode .= "</header>";
+    $htmlCode .= "</nav></header>";
     return $htmlCode;
 }
 

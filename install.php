@@ -27,47 +27,29 @@
     `preparation` varchar(200) NOT NULL
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Index pour les tables déchargées
---
 
---
--- Index pour la table `recette`
---
     ALTER TABLE `recette`
     ADD PRIMARY KEY (`id`),
-    ADD UNIQUE KEY `titre` (`titre`);
-    COMMIT;
+    ADD UNIQUE KEY `titre` (`titre`);    
     
-    --
--- Structure de la table `user`
---
+    COMMIT;
 
-CREATE TABLE `user` (
-  `id` int(3) NOT NULL,
-  `login` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `forename` varchar(20) NOT NULL,
-  `age` int(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+    CREATE TABLE `user` (
+      `id` int(3) NOT NULL,
+      `login` varchar(20) NOT NULL,
+      `password` varchar(20) NOT NULL,
+      `forename` varchar(20) NOT NULL,
+      `age` int(3) NOT NULL,
+      `favoritesRecipes` VARCHAR(255)
+    ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Index pour la table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `login` (`login`);
+    ALTER TABLE `user`
+      ADD PRIMARY KEY (`id`),
+      ADD UNIQUE KEY `login` (`login`);
+    
 
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
-
+    ALTER TABLE `user`
+    MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
     INSERT INTO recette  (id, titre, ingredients, preparation) VALUES 
     ";
