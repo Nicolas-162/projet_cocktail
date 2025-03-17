@@ -49,7 +49,7 @@
     
 
     ALTER TABLE `user`
-    MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+    MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;COMMIT;
 
     INSERT INTO recette  (id, titre, ingredients, preparation) VALUES 
     ";
@@ -62,12 +62,53 @@
     for ($i= 0 ; $i<$borne ; ++$i)
         $script .= "(".$i.",'".mysqli_real_escape_string($mysqli,$Recettes[$i]['titre'])."','".mysqli_real_escape_string($mysqli,$Recettes[$i]['ingredients'])."','".mysqli_real_escape_string($mysqli,$Recettes[$i]['preparation'])."'),";
     $script .= "(".$borne.",'".mysqli_real_escape_string($mysqli,$Recettes[$borne]['titre'])."','".mysqli_real_escape_string($mysqli,$Recettes[$borne]['ingredients'])."','".mysqli_real_escape_string($mysqli,$Recettes[$borne]['preparation'])."');";
-    $script .= "COMMIT;
+
+
+
+$script .= "
+    CREATE TABLE `aliment` (
+       `id` int(3) NOT NULL,
+       `name` varchar(100) NOT NULL,
+       `count` int(3) UNSIGNED NOT NULL
+    ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+    
+    ALTER TABLE `aliment`
+    ADD PRIMARY KEY (`id`),
+    ADD UNIQUE KEY `name` (`name`);    
+
+    ALTER TABLE `aliment`
+    MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;COMMIT;
+    
+    INSERT INTO aliment (name,count) VALUES ";
+
+
+    // recuperation de la liste des aliments
+    $foodsList = array ();
+    foreach ($Recettes as $id => $recette) {
+        $ingredients = explode("|", $recette['ingredients']);
+        foreach ($ingredients as $index => $ingredient) {
+            $food = extractFood($ingredient);
+            if ($food != "") {
+                if (!array_key_exists($food, $foodsList))
+                    $foodsList[$food] = 1;
+                else
+                    $foodsList[$food]++;
+            }
+        }
+    }
+    foreach ($foodsList as $name => $count) {
+        $script .= "('".mysqli_real_escape_string($mysqli,$name)."',".mysqli_real_escape_string($mysqli,$count)."),";
+    }
+    $script = substr($script, 0, strlen($script) - 1);
+    $script .= ";";
+
+
+
+        $script .= "COMMIT;
     /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
     /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
     /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
     ";
-
 
     $res = multi_query($mysqli,$script.$base);
     mysqli_close($mysqli);

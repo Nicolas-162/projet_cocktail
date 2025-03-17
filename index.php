@@ -8,6 +8,7 @@
     <head>
         <title>Cocktails</title>
         <meta charset="utf-8" />
+        <link type="text/css"  rel="stylesheet" href="style.css" />
     </head>
 
     <main>
@@ -30,11 +31,13 @@
         else if ($_GET['p'] == "onDisconnect") {
             session_destroy();
             header("Refresh: 0; url=index.php");
-        } else if ($_GET['p'] == "recipesList") {
+        } else if ($_GET['p'] == "recipesList")
             include ("recipesList.php");
-        } else if ($_GET['p'] == "recipeDetails") {
+        else if ($_GET['p'] == "recipeDetails")
             include ("recipeDetails.php");
-        } else if ($_GET['p'] == "recipeByIngredient")
+        else if ($_GET['p'] == "recipeByIngredient")
             include ("recipeByIngredient.php");
+        else if ($_GET['p'] == "foodsList")
+            include ("foodsList.php");
     }
 ?>
