@@ -1,8 +1,11 @@
 <?php
     include ($filename);
+
+
+
     $script = "
         DROP DATABASE IF EXISTS ".$base.";
-        CREATE DATABASE IF NOT EXISTS ".$base.";
+        CREATE DATABASE ".$base.";
         
         SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
         SET AUTOCOMMIT=0;
@@ -54,7 +57,7 @@
     INSERT INTO recette  (id, titre, ingredients, preparation) VALUES 
     ";
 
-    $mysqli = mysqli_connect($host, $user, $pass, $base)
+    $mysqli = mysqli_connect($host, $user, $pass)
     or die ("Erreur de connexion : ".mysqli_error($mysqli));
 
 
