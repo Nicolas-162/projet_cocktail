@@ -124,7 +124,6 @@ $script .="
     /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
     ";
 
-        echo $script;
 
     $res = multi_query($mysqli,$script.$base);
     mysqli_close($mysqli);
