@@ -33,11 +33,12 @@ function getHeader($isConnected){
                     <li><a href='index.php?p=foodsList'>Liste des aliments</a></li>
                     <li><a href='index.php?p=onDisconnect'>Se déconnecter</a></li>";
     } else {
-        $htmlCode .= "<li><a href='log.php?p=onLogIn'>connexion</a></li>
-                     <li><a href='log.php?p=onSignIn'>inscription</a></li>";
+        $htmlCode .= "<li><a href='log.php?p=onLogIn'>Connexion</a></li>
+                     <li><a href='log.php?p=onSignUp'>Inscription</a></li>";
     }
-    $htmlCode .= "<li><a href='?p=install'>installation</a></li>
-                   <li><a href='?p=recipesList'>liste des recettes</a></li>
+    $htmlCode .= "<li><a href='?p=install'>Installation</a></li>
+                   <li><a href='?p=recipesList'>Liste des recettes</a></li>
+                   <li><a href='?p=favoritesUsersRecipes'>Accès aux recettes préférées de tous les utilisateurs</a></li>
     </ul></nav></header>";
     return $htmlCode;
 }

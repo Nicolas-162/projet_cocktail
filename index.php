@@ -39,5 +39,7 @@
             include ("recipeByIngredient.php");
         else if ($_GET['p'] == "foodsList")
             include ("foodsList.php");
+        else if ($_GET['p'] == "favoritesUsersRecipes")
+            include ("favoritesUsersRecipes.php");
     }
 ?>
