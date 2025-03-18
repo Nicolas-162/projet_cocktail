@@ -60,17 +60,6 @@
     $mysqli = mysqli_connect($host, $user, $pass)
     or die ("Erreur de connexion : ".mysqli_error($mysqli));
 
-    $script .= "
-        CREATE TABLE `favorite_recipe` (
-            `user_id` int(3) NOT NULL,
-            `recipe_id` int(3) UNSIGNED NOT NULL,
-            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (`user_id`, `recipe_id`),
-            FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
-            FOREIGN KEY (`recipe_id`) REFERENCES `recette`(`id`) ON DELETE CASCADE
-        ) ENGINE=InnoDB;
-    ";
-
 
     $borne = count($Recettes)-1;
     for ($i= 0 ; $i<$borne ; ++$i)
@@ -80,6 +69,7 @@
 
 
 $script .= "
+
     CREATE TABLE `aliment` (
        `id` int(3) NOT NULL,
        `name` varchar(100) NOT NULL,
@@ -91,9 +81,11 @@ $script .= "
     ADD UNIQUE KEY `name` (`name`);    
 
     ALTER TABLE `aliment`
-    MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;COMMIT;
+    MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+    COMMIT;
     
-    INSERT INTO aliment (name,count) VALUES ";
+INSERT INTO aliment (name,count) VALUES ";
+
 
 
     // recuperation de la liste des aliments
@@ -114,15 +106,25 @@ $script .= "
         $script .= "('".mysqli_real_escape_string($mysqli,$name)."',".mysqli_real_escape_string($mysqli,$count)."),";
     }
     $script = substr($script, 0, strlen($script) - 1);
-    $script .= ";";
+    $script .= ";COMMIT;";
 
-
+$script .="
+        CREATE TABLE `favorite_recipe` (
+            `user_id` int(3) NOT NULL,
+            `recipe_id` int(3) UNSIGNED NOT NULL,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`user_id`, `recipe_id`),
+            FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+            FOREIGN KEY (`recipe_id`) REFERENCES `recette`(`id`) ON DELETE CASCADE
+        ) ENGINE=MyIsam ;";
 
         $script .= "COMMIT;
     /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
     /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
     /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
     ";
+
+        echo $script;
 
     $res = multi_query($mysqli,$script.$base);
     mysqli_close($mysqli);
