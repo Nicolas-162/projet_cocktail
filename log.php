@@ -97,7 +97,9 @@ if (isset($_GET['p'])){
 
                             echo getFormSignIn();
                         } else {
-                            $_SESSION["user"] = array( 'login' => $login, 'password' => $passwd, 'forename' => $forename, 'age' => $age);
+                            $res = query($mysqli, "SELECT id FROM user WHERE login='$login'");
+                            $row =(mysqli_fetch_assoc($res));
+                            $_SESSION["user"] = array( 'id' =>$row['id'], 'login' => $login, 'password' => $passwd, 'forename' => $forename, 'age' => $age);
                             $_SESSION["connectedUser"] = true;
                             echo "Authentification reussie, bienvenu(e) " . $forename . ".";
                             echo "<a href='index.php'>Retourner à l'accueil</a>";
@@ -144,8 +146,8 @@ function getFormLogIn(){
                     <input type='submit' value='Se connecter' />
                     <input type='text' name='logParameter' value='logIn' hidden='hidden'/>
                 </form> 
-                Pas de compte ?  <a href='log.php?p=onSignUp'>S'inscrire</a>";
-    $_SESSION['connectedUser'] = true;
+                Pas de compte ?  <a href='log.php?p=onSignUp'>S'inscrire</a>
+                <a href='index.php'>Retourner à l'accueil</a>";
     return $htmlCode;
 }
 function getFormSignIn(){
@@ -168,7 +170,9 @@ function getFormSignIn(){
                     <input type='submit' value='S`inscrire' />
                      <input type='text' name='logParameter' value='signIn' hidden='hidden'/>
 
-                </form> ";
+                </form>
+                
+                <a href='index.php'>Retourner à l'accueil</a> ";
 }
 function getFormAccount(){
     return "<h1>Informations de compte</h1>
@@ -187,7 +191,9 @@ function getFormAccount(){
                 <input type='submit' value='Appliquer les modifications' />
                 <input type='text' name='logParameter' value='accountData' hidden='hidden'/>
 
-                </form>";
+                </form>
+                
+                <a href='index.php'>Retourner à l'accueil</a>";
 }
 
 

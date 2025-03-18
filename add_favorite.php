@@ -14,7 +14,8 @@
 
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $recipe_id = (int)$_POST['recipe_id'];
-      $user_id = $_SESSION['user_id'];
+      print_r($_SESSION['user']);
+      $user_id = $_SESSION['user']['id'];
 
       // Check if already favorited
       $stmt = $mysqli->prepare("

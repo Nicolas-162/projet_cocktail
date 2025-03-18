@@ -1,7 +1,5 @@
 <?php
 
-    session_start();
-
     $mysqli = mysqli_connect($host, $user, $pass, $base);
     mysqli_set_charset($mysqli, 'utf8'); // pour eviter les problemes d'encodage
 
@@ -21,7 +19,7 @@
                     <button type='submit' style='background:none;border:none;color:#f00;cursor:pointer;'>🖤</button>
                 </form></li>";
         } else {
-            echo "<a href='login.php' style='color:#00f;text-decoration:underline;'>Login to favorite</a></li>";
+            echo "<a href='log.php?p=onLogIn' style='color:#00f;text-decoration:underline;'>Login to favorite</a></li>";
         }
 
     }

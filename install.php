@@ -42,8 +42,7 @@
       `login` varchar(20) NOT NULL,
       `password` varchar(20) NOT NULL,
       `forename` varchar(20) NOT NULL,
-      `age` int(3) NOT NULL,
-      `favoritesRecipes` VARCHAR(255)
+      `age` int(3) NOT NULL
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
     ALTER TABLE `user`
@@ -123,7 +122,6 @@ $script .="
     /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
     /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
     ";
-
 
     $res = multi_query($mysqli,$script.$base);
     mysqli_close($mysqli);
