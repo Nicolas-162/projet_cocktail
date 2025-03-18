@@ -62,8 +62,8 @@
 
     $script .= "
         CREATE TABLE `favorite_recipe` (
-            `user_id` INT NOT NULL,
-            `recipe_id` INT UNSIGNED NOT NULL,
+            `user_id` int(3) NOT NULL,
+            `recipe_id` int(3) UNSIGNED NOT NULL,
             `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`user_id`, `recipe_id`),
             FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
