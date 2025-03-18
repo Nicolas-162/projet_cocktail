@@ -60,6 +60,17 @@
     $mysqli = mysqli_connect($host, $user, $pass)
     or die ("Erreur de connexion : ".mysqli_error($mysqli));
 
+    $script .= "
+        CREATE TABLE `favorite_recipe` (
+            `user_id` INT NOT NULL,
+            `recipe_id` INT UNSIGNED NOT NULL,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`user_id`, `recipe_id`),
+            FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+            FOREIGN KEY (`recipe_id`) REFERENCES `recette`(`id`) ON DELETE CASCADE
+        ) ENGINE=InnoDB;
+    ";
+
 
     $borne = count($Recettes)-1;
     for ($i= 0 ; $i<$borne ; ++$i)
