@@ -7,7 +7,7 @@ if (isset($_GET['p'])){
         case "onLogIn":
             echo getFormLogIn();
             break;
-        case "onSignIn":
+        case "onSignUp":
             echo getFormSignIn();
             break;
         case "onAccount":
